@@ -21,6 +21,13 @@
 		var shakeThreshold = 15; // set the threshold for detecting a shake
 		var lastX, lastY, lastZ; // store the previous accelerometer readings
 		var box = document.getElementById("box");
+		var quotes = [
+		  "The best way to predict the future is to create it. - Abraham Lincoln",
+		  "In three words I can sum up everything I've learned about life: it goes on. - Robert Frost",
+		  "Believe you can and you're halfway there. - Theodore Roosevelt",
+		  "Success is not final, failure is not fatal: it is the courage to continue that counts. - Winston Churchill",
+		  "The only way to do great work is to love what you do. - Steve Jobs"
+		];
 
 		if (window.DeviceMotionEvent) {
 			window.addEventListener("devicemotion", function(event) {
@@ -31,6 +38,7 @@
 
 				if (deltaX > shakeThreshold && deltaY > shakeThreshold || deltaX > shakeThreshold && deltaZ > shakeThreshold || deltaY > shakeThreshold && deltaZ > shakeThreshold) {
 					changeBackgroundColor();
+					displayQuote();
 				}
 
 				lastX = acceleration.x;
@@ -45,6 +53,11 @@
 			var blue = Math.floor(Math.random() * 256);
 			var color = "rgb(" + red + ", " + green + ", " + blue + ")";
 			document.body.style.backgroundColor = color;
+		}
+
+		function displayQuote() {
+			var quote = quotes[Math.floor(Math.random() * quotes.length)];
+			alert(quote);
 		}
 	</script>
 </body>
