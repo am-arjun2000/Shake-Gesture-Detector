@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shake Gesture Demo</title>
+	<style>
+		#box {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+
+	<script>
+		var shakeThreshold = 15; // set the threshold for detecting a shake
+		var lastX, lastY, lastZ; // store the previous accelerometer readings
+		var box = document.getElementById("box");
+
+		if (window.DeviceMotionEvent) {
+			window.addEventListener("devicemotion", function(event) {
+				var acceleration = event.accelerationIncludingGravity;
+				var deltaX = Math.abs(lastX - acceleration.x);
+				var deltaY = Math.abs(lastY - acceleration.y);
+				var deltaZ = Math.abs(lastZ - acceleration.z);
+
+				if (deltaX > shakeThreshold && deltaY > shakeThreshold || deltaX > shakeThreshold && deltaZ > shakeThreshold || deltaY > shakeThreshold && deltaZ > shakeThreshold) {
+					changeBackgroundColor();
+				}
+
+				lastX = acceleration.x;
+				lastY = acceleration.y;
+				lastZ = acceleration.z;
+			});
+		}
+
+		function changeBackgroundColor() {
+			var red = Math.floor(Math.random() * 256);
+			var green = Math.floor(Math.random() * 256);
+			var blue = Math.floor(Math.random() * 256);
+			var color = "rgb(" + red + ", " + green + ", " + blue + ")";
+			document.body.style.backgroundColor = color;
+		}
+	</script>
+</body>
+</html>
