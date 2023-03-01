@@ -12,17 +12,26 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 		}
+		
+		#quote {
+			font-style: italic;
+			font-size: 20px;
+			position: absolute;
+			top: 60%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
 	</style>
 </head>
 <body>
-	<div id="box"></div>	
-
-	<h1>shake the device to see quotes...</h1>
+	<div id="box"></div>
+	<div id="quote"></div>
 
 	<script>
 		var shakeThreshold = 15; // set the threshold for detecting a shake
 		var lastX, lastY, lastZ; // store the previous accelerometer readings
 		var box = document.getElementById("box");
+		var quoteDiv = document.getElementById("quote");
 		var quotes = [
 		  "The best way to predict the future is to create it. - Abraham Lincoln",
 		  "In three words I can sum up everything I've learned about life: it goes on. - Robert Frost",
@@ -59,7 +68,7 @@
 
 		function displayQuote() {
 			var quote = quotes[Math.floor(Math.random() * quotes.length)];
-			alert(quote);
+			quoteDiv.innerHTML = quote;
 		}
 	</script>
 </body>
